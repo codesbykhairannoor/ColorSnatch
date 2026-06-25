@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-slate-50 text-gray-900 transition-colors duration-500 antialiased relative;
+    /* Soft light mode background */
+    background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,0.03) 0, transparent 50%), 
+                      radial-gradient(at 50% 0%, hsla(225,39%,30%,0.03) 0, transparent 50%), 
+                      radial-gradient(at 100% 0%, hsla(339,49%,30%,0.03) 0, transparent 50%);
+  }
+  
+  .dark body {
+    @apply bg-slate-950 text-gray-100;
+    /* Premium dark mode mesh gradient */
+    background-color: #020617;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(253, 100%, 15%, 0.4) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(320, 100%, 15%, 0.4) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(280, 100%, 15%, 0.4) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(220, 100%, 15%, 0.4) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Custom Eye Dropper cursor */
+.cursor-crosshair {
+  cursor: crosshair;
+}
