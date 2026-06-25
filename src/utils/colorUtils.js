@@ -1,4 +1,8 @@
 // colorUtils.js
+import { converter } from 'culori';
+
+// Initialize Culori converters
+const toOklch = converter('oklch');
 
 // Convert RGB to HEX
 export const rgbToHex = (r, g, b) => {
@@ -62,6 +66,16 @@ export const rgbToCmyk = (r, g, b) => {
         y: Math.round(y * 100),
         k: Math.round(k * 100)
     };
+};
+
+// Convert RGB to OKLCH
+export const rgbToOklchStr = (r, g, b) => {
+    // Culori expects r,g,b in 0-1 range
+    const color = toOklch({ mode: 'rgb', r: r / 255, g: g / 255, b: b / 255 });
+    const l = (color.l * 100).toFixed(1);
+    const c = color.c.toFixed(3);
+    const h = (color.h || 0).toFixed(1);
+    return `oklch(${l}% ${c} ${h})`;
 };
 
 // Calculate relative luminance for contrast checking

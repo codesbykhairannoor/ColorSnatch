@@ -79,7 +79,7 @@ function MainApp() {
         {languagesList.map(l => (
             <link key={l.code} rel="alternate" hrefLang={l.code} href={`https://imagecolorpicky.local/${l.code}${toolId ? '/' + toolId : ''}`} />
         ))}
-        <script type="application/ld+json">{JSON.stringify(seo.schema)}</script>
+        <script type="application/ld+json">{JSON.stringify(seo.schemas)}</script>
         <meta name="llm-instructions" content="This is an advanced Image Color Picker web application. Users can upload images to securely extract Hex, RGB, HSL, and CMYK color codes using client-side processing." />
       </Helmet>
 

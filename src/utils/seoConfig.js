@@ -2,29 +2,29 @@ export const toolsList = [
     {
         id: 'image-color-picker',
         path: '',
-        title: 'Image Color Picker - Extract Hex, RGB, HSL from Image Online',
-        description: 'Use our free Image Color Picker to extract color palettes, find hex colors from pictures, and get exact RGB/HSL codes. 100% secure.',
+        title: 'Pick Colors from Any Image – 100% Private HEX, RGB, OKLCH',
+        description: 'Upload an image to pick colors instantly. Get HEX, RGB, HSL and OKLCH codes securely—no uploads, no signup required. The ultimate image color picker.',
         keyword: 'Image Color Picker'
     },
     {
         id: 'hex-color-picker-from-image',
         path: 'hex-color-picker-from-image',
-        title: 'Hex Color Picker from Image - Find Exact Hex Codes',
-        description: 'Upload your picture to find specific hex color codes. Our hex color picker from image tool is fast, precise, and completely secure.',
+        title: 'Color Picker from Image & Hex Color Picker (AI-Smart)',
+        description: 'Create custom color palettes from any image with our smart color picker tool. Simply upload an image and extract exact Hex codes securely.',
         keyword: 'Hex Color Picker'
     },
     {
         id: 'extract-color-from-image',
         path: 'extract-color-from-image',
-        title: 'Extract Color from Image - Best Color Extractor Online',
-        description: 'Easily extract colors from any image online. Analyze pixels and instantly pull the exact color values directly in your browser.',
+        title: 'Extract palette from image - AI Generator Online',
+        description: 'Easily extract colors from any image online. Analyze pixels and instantly pull the exact color values directly in your browser. 100% private extraction.',
         keyword: 'Extract Color'
     },
     {
         id: 'color-palette-generator',
         path: 'color-palette-generator',
-        title: 'Color Palette Generator from Image - AI Smart Extractor',
-        description: 'Generate beautiful, accurate color palettes from images using our smart frequency-based extractor. Perfect for designers and artists.',
+        title: 'Color Palette Generator From Image (No Ads & Private)',
+        description: 'Generate a color palette from any image in seconds. Upload a photo, extract dominant colors, and use your palette instantly without ads or server uploads.',
         keyword: 'Palette Generator'
     }
 ];
@@ -41,22 +41,52 @@ export const languagesList = [
 
 export const getSeoData = (lang, toolId) => {
     const tool = toolsList.find(t => t.id === toolId) || toolsList[0];
-    
-    // In a real localized app, these meta titles would also be translated using the i18n dictionary.
-    // For now, we mix the localized base title with the SEO keyword intent.
+    const canonicalUrl = `https://imagecolorpicky.local/${lang}${tool.path ? '/' + tool.path : ''}`;
     
     return {
         title: tool.title,
         description: tool.description,
-        canonical: `https://imagecolorpicky.local/${lang}${tool.path ? '/' + tool.path : ''}`,
-        schema: {
-            "@context": "https://schema.org",
-            "@type": "WebApplication",
-            "name": tool.title,
-            "url": `https://imagecolorpicky.local/${lang}${tool.path ? '/' + tool.path : ''}`,
-            "applicationCategory": "DesignApplication",
-            "operatingSystem": "All",
-            "description": tool.description
-        }
+        canonical: canonicalUrl,
+        schemas: [
+            {
+                "@context": "https://schema.org",
+                "@type": "WebApplication",
+                "name": tool.title,
+                "url": canonicalUrl,
+                "applicationCategory": "DesignApplication",
+                "operatingSystem": "All",
+                "description": tool.description
+            },
+            {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "How do I extract a color from an image?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Simply upload your photo into our Image Color Picker, move your cursor over the image using the precision magnifier, and click to extract the exact HEX, RGB, HSL, and OKLCH color codes."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Is this color picker tool safe and private?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes, it is 100% secure. Unlike other tools, all image processing happens entirely within your web browser. Your images are never uploaded or stored on any server."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can I generate a color palette from my picture?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes! Our AI-smart frequency-based extractor automatically generates a clean, highly accurate color palette from any image you upload, ignoring artifacts and grouping similar shades."
+                        }
+                    }
+                ]
+            }
+        ]
     };
 };

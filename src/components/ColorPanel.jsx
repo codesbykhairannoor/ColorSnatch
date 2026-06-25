@@ -1,72 +1,69 @@
 import React from 'react';
-import { Copy } from 'lucide-react';
-import { rgbToHex, rgbToHsl, rgbToCmyk } from '../utils/colorUtils';
+import { rgbToHex, rgbToHsl, rgbToCmyk, rgbToOklchStr } from '../utils/colorUtils';
 import { toast } from 'react-toastify';
-import { motion } from 'framer-motion';
+import { Copy } from 'lucide-react';
 
 export const ColorPanel = ({ t, pickedColor }) => {
-    const hex = rgbToHex(pickedColor.r, pickedColor.g, pickedColor.b).toUpperCase();
-    const hslObj = rgbToHsl(pickedColor.r, pickedColor.g, pickedColor.b);
-    const hslStr = `hsl(${hslObj.h}, ${hslObj.s}%, ${hslObj.l}%)`;
-    const rgbStr = `rgb(${pickedColor.r}, ${pickedColor.g}, ${pickedColor.b})`;
-    const cmykObj = rgbToCmyk(pickedColor.r, pickedColor.g, pickedColor.b);
-    const cmykStr = `cmyk(${cmykObj.c}%, ${cmykObj.m}%, ${cmykObj.y}%, ${cmykObj.k}%)`;
+    const { r, g, b } = pickedColor;
+    
+    const hex = rgbToHex(r, g, b).toUpperCase();
+    const hsl = rgbToHsl(r, g, b);
+    const cmyk = rgbToCmyk(r, g, b);
+    const oklch = rgbToOklchStr(r, g, b);
 
-    const handleCopy = (text) => {
-        navigator.clipboard.writeText(text);
-        toast.success(`Copied ${text}`);
+    const colorCodes = [
+        { label: 'HEX', value: hex },
+        { label: 'RGB', value: `rgb(${r}, ${g}, ${b})` },
+        { label: 'HSL', value: `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)` },
+        { label: 'CMYK', value: `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)` },
+        { label: 'OKLCH', value: oklch }
+    ];
+
+    const handleCopy = (value, label) => {
+        navigator.clipboard.writeText(value);
+        toast.success(`Copied ${label} to clipboard!`);
     };
 
     return (
-        <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-transparent rounded-3xl p-6 flex flex-col h-full border-0"
-        >
-            <h3 className="text-lg font-bold mb-6 text-gray-900 dark:text-white">{t?.selectedColor || 'Selected Color'}</h3>
+        <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 h-full flex flex-col">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                {t?.selectedColor || 'Extracted Color Details'}
+            </h3>
             
-            <div className="flex items-center gap-6 mb-8">
-                <motion.div 
-                    layoutId="colorPreview"
-                    className="w-24 h-24 rounded-2xl shadow-inner border border-gray-100 dark:border-gray-700 flex-shrink-0" 
-                    style={{ backgroundColor: hex }}
-                    animate={{ backgroundColor: hex }}
-                    transition={{ duration: 0.2 }}
-                />
-                <div className="flex-grow">
-                    <label className="block text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2">HEX</label>
-                    <div className="flex relative group">
-                        <input 
-                            type="text" 
-                            value={hex} 
-                            readOnly 
-                            onClick={() => handleCopy(hex)}
-                            className="w-full bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-xl py-3 px-4 text-lg font-mono font-medium focus:outline-none dark:text-white cursor-pointer hover:border-primary transition-colors"
-                        />
-                        <button 
-                            onClick={() => handleCopy(hex)}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-primary transition-colors" 
-                            title="Copy HEX"
+            <div className="flex-1 flex flex-col justify-between">
+                <div className="flex items-center gap-6 mb-8">
+                    <div 
+                        className="w-24 h-24 rounded-2xl shadow-inner border border-gray-200 dark:border-gray-700 transition-colors duration-200"
+                        style={{ backgroundColor: hex }}
+                    ></div>
+                    <div className="flex-1">
+                        <p className="text-xs font-bold text-gray-400 dark:text-gray-500 mb-1 uppercase tracking-wider">HEX</p>
+                        <div 
+                            onClick={() => handleCopy(hex, 'HEX')}
+                            className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 flex justify-between items-center cursor-pointer hover:border-primary hover:shadow-sm transition-all group"
                         >
-                            <Copy className="w-5 h-5" />
-                        </button>
+                            <span className="font-mono font-bold text-gray-800 dark:text-gray-200">{hex}</span>
+                            <Copy className="w-4 h-4 text-gray-400 group-hover:text-primary transition-colors" />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="space-y-4">
-                <FormatRow label="RGB" value={rgbStr} onCopy={handleCopy} />
-                <FormatRow label="HSL" value={hslStr} onCopy={handleCopy} />
-                <FormatRow label="CMYK" value={cmykStr} onCopy={handleCopy} />
+                <div className="space-y-4">
+                    {colorCodes.slice(1).map((code) => (
+                        <div key={code.label} className="flex justify-between items-center group">
+                            <span className="text-xs font-bold text-gray-400 dark:text-gray-500 w-16 uppercase tracking-wider">
+                                {code.label}
+                            </span>
+                            <div 
+                                onClick={() => handleCopy(code.value, code.label)}
+                                className="flex-1 text-right text-sm font-mono font-medium text-gray-700 dark:text-gray-300 bg-transparent hover:bg-gray-50 dark:hover:bg-gray-800/50 py-1.5 px-3 rounded-lg cursor-pointer transition-colors relative"
+                            >
+                                {code.value}
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
-        </motion.div>
+        </div>
     );
 };
-
-const FormatRow = ({ label, value, onCopy }) => (
-    <div className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors group cursor-pointer" onClick={() => onCopy(value)}>
-        <span className="text-sm font-semibold text-gray-400 w-16">{label}</span>
-        <span className="text-sm font-mono text-gray-700 dark:text-gray-200">{value}</span>
-        <Copy className="w-4 h-4 text-gray-300 dark:text-gray-600 group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100" />
-    </div>
-);
