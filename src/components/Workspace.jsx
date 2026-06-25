@@ -106,7 +106,7 @@ export const Workspace = ({ t, onColorPicked, onImageLoaded }) => {
                     <motion.div 
                         initial={{ opacity: 0, scale: 0.95 }} 
                         animate={{ opacity: 1, scale: 1 }} 
-                        className={`relative w-full h-full bg-gray-100 dark:bg-gray-900 overflow-hidden flex items-center justify-center ${isHovering ? 'cursor-none' : 'cursor-crosshair'}`}
+                        className={`relative w-full h-full bg-gray-100 dark:bg-gray-900 overflow-hidden flex items-center justify-center ${isHovering ? 'cursor-none' : 'cursor-picker'}`}
                         onMouseMove={handleMouseMove}
                         onMouseLeave={handleMouseLeave}
                         onClick={handleClick}
