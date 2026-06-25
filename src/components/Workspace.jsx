@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useColorPicker } from '../hooks/useColorPicker';
-import { UploadCloud, X } from 'lucide-react';
+import { UploadCloud, X, Pipette } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const Workspace = ({ t, onColorPicked, onImageLoaded }) => {
@@ -106,7 +106,7 @@ export const Workspace = ({ t, onColorPicked, onImageLoaded }) => {
                     <motion.div 
                         initial={{ opacity: 0, scale: 0.95 }} 
                         animate={{ opacity: 1, scale: 1 }} 
-                        className={`relative w-full h-full bg-gray-100 dark:bg-gray-900 overflow-hidden flex items-center justify-center ${isHovering ? 'cursor-none' : 'cursor-picker'}`}
+                        className={`relative w-full h-full bg-gray-100 dark:bg-gray-900 overflow-hidden flex items-center justify-center ${isHovering ? 'cursor-none' : 'cursor-crosshair'}`}
                         onMouseMove={handleMouseMove}
                         onMouseLeave={handleMouseLeave}
                         onClick={handleClick}
@@ -135,11 +135,15 @@ export const Workspace = ({ t, onColorPicked, onImageLoaded }) => {
                                 }}
                             >
                                 <canvas ref={magnifierCanvasRef} className="w-full h-full object-cover" width="100" height="100" />
-                                {/* Crosshair Center Reticle */}
-                                <div className="absolute inset-0 flex items-center justify-center mix-blend-difference text-white">
-                                    <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-                                    <div className="absolute w-full h-[1px] bg-white/50"></div>
-                                    <div className="absolute h-full w-[1px] bg-white/50"></div>
+                                {/* Paint / Pipette Icon Center Reticle */}
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    {/* The exact pixel target dot (mix-blend so it's always visible) */}
+                                    <div className="w-1.5 h-1.5 bg-white mix-blend-difference rounded-full z-10"></div>
+                                    
+                                    {/* The Paint/Pipette Icon pointing exactly to the center pixel */}
+                                    <div className="absolute left-1/2 bottom-1/2 mb-0.5 ml-0.5 pointer-events-none">
+                                        <Pipette className="w-5 h-5 text-white drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]" strokeWidth={2.5} />
+                                    </div>
                                 </div>
                             </div>
                         )}
