@@ -1,0 +1,10 @@
+# Image Color Picker Online
+
+> The most advanced, 100% secure, client-side tool to extract HEX, RGB, HSL, CMYK, and OKLCH colors directly from any image. No server uploads. AI-powered dominant color palette generation.
+
+## Color Tools
+
+- [Pick Colors from Any Image – 100% Private HEX, RGB, OKLCH](https://imagecolorpicky.local/id): Upload an image to pick colors instantly. Get HEX, RGB, HSL and OKLCH codes securely—no uploads, no signup required. The ultimate image color picker.
+- [Color Picker from Image & Hex Color Picker (AI-Smart)](https://imagecolorpicky.local/id/hex-color-picker-from-image): Create custom color palettes from any image with our smart color picker tool. Simply upload an image and extract exact Hex codes securely.
+- [Extract palette from image - AI Generator Online](https://imagecolorpicky.local/id/extract-color-from-image): Easily extract colors from any image online. Analyze pixels and instantly pull the exact color values directly in your browser. 100% private extraction.
+- [Color Palette Generator From Image (No Ads & Private)](https://imagecolorpicky.local/id/color-palette-generator): Generate a color palette from any image in seconds. Upload a photo, extract dominant colors, and use your palette instantly without ads or server uploads.

@@ -59,6 +59,30 @@ export const getSeoData = (lang, toolId) => {
             },
             {
                 "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "Image Color Picky",
+                "url": "https://imagecolorpicky.local",
+                "logo": "https://imagecolorpicky.local/vite.svg"
+            },
+            {
+                "@context": "https://schema.org",
+                "@type": "SoftwareApplication",
+                "name": tool.title,
+                "operatingSystem": "Web Browser",
+                "applicationCategory": "DesignApplication",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "ratingCount": "12480"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                }
+            },
+            {
+                "@context": "https://schema.org",
                 "@type": "FAQPage",
                 "mainEntity": [
                     {

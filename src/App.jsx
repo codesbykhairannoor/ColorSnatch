@@ -9,6 +9,7 @@ import { Hero } from './components/Hero';
 import { Workspace } from './components/Workspace';
 import { ColorPanel } from './components/ColorPanel';
 import { PaletteGenerator } from './components/PaletteGenerator';
+import { FactDensitySEO } from './components/FactDensitySEO';
 import { translations, getAutoLanguage } from './i18n';
 import { getSeoData, languagesList, toolsList } from './utils/seoConfig';
 
@@ -107,6 +108,8 @@ function MainApp() {
             </div>
           </div>
         </div>
+
+        <FactDensitySEO currentTool={toolsList.find(x => x.id === currentTool)} t={t} />
 
         {/* AI-Friendly Accessibility Semantic Article */}
         <article className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl rounded-[2.5rem] shadow-sm border border-white/40 dark:border-white/10 p-10 md:p-14 prose dark:prose-invert max-w-4xl mx-auto transition-colors relative z-10 mt-20">
