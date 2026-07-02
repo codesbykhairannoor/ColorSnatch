@@ -10,6 +10,7 @@ import { Workspace } from './components/Workspace';
 import { ColorPanel } from './components/ColorPanel';
 import { PaletteGenerator } from './components/PaletteGenerator';
 import { FactDensitySEO } from './components/FactDensitySEO';
+import { SeoFooterMatrix } from './components/SeoFooterMatrix';
 import { translations, getAutoLanguage } from './i18n';
 import { getSeoData, languagesList, toolsList } from './utils/seoConfig';
 
@@ -130,16 +131,7 @@ function MainApp() {
           <p className="text-gray-600 dark:text-gray-400 text-xl leading-relaxed">{t.securityText}</p>
         </article>
       </main>
-
-      <footer className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-t border-white/20 dark:border-white/5 py-12 transition-colors mt-auto relative z-10">
-        <div className="max-w-7xl mx-auto px-4 text-center flex flex-col items-center justify-center gap-6">
-          <p className="text-base text-gray-500 dark:text-gray-400 font-semibold tracking-wide">&copy; 2026 Image Color Picky. All rights reserved.</p>
-          <div className="bg-green-100/80 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-5 py-2.5 rounded-full text-sm font-bold inline-flex items-center backdrop-blur-md border border-green-200/50 dark:border-green-800/50 shadow-lg shadow-green-500/10">
-            <span className="w-2.5 h-2.5 bg-green-500 rounded-full mr-3 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.8)]"></span>
-            100% Secure & Local - No Images Uploaded to Server
-          </div>
-        </div>
-      </footer>
+      <SeoFooterMatrix toolsList={toolsList} languagesList={languagesList} currentLang={currentLang} />
 
       <ToastContainer position="bottom-right" theme={theme} toastClassName="!rounded-2xl !shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)] !font-sans !font-semibold !text-sm !backdrop-blur-2xl !bg-white/90 dark:!bg-slate-800/90 !border !border-white/20 dark:!border-white/10" autoClose={2000} hideProgressBar />
     </div>

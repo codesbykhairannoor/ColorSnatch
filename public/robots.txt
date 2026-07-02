@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# B2A Protocols (LLM Web Crawlers)
+Allow: /*/llms.txt
+Allow: /*/llms-full.txt
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+Sitemap: https://imagecolorpicky.local/sitemap.xml
